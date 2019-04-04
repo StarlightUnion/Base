@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>数据的归类整理</title>
+
+    <script>
+        //1.数据的归类，按照某一个字段进行归类处理
+        var arr = [
+            {District: "东部", SubDistrict: "浙江", info: {cities: ["杭州", "绍兴", "宁波"]}},
+            {District: "东部", SubDistrict: "上海", info: {cities: ["静安", "浦东", "奉贤", "松江"]}},
+            {District: "北部", SubDistrict: "天津", info: {cities: ["和平", "北辰", "武清", "静海"]}},
+            {District: "北部", SubDistrict: "北京", info: {cities: ["东城", "西城", "朝阳"]}},
+            {District: "中部", SubDistrict: "河南", info: {cities: ["郑州", "驻马店", "南阳"]}},
+            {District: "中部", SubDistrict: "湖北", info: {cities: ["武汉", "荆州"]}},
+            {District: "南部", SubDistrict: "广东", info: {cities: ["广州", "深圳"]}},
+            {District: "西部", SubDistrict: "陕西", info: {cities: ["西安", "汉中"]}},
+            {District: "东部", SubDistrict: "福建", info: {cities: ["福州", "厦门"]}},
+            {District: "中部", SubDistrict: "山西", info: {cities: ["太原", "运城"]}},
+            {District: "北部", SubDistrict: "河北", info: {cities: ["石家庄", "唐山"]}},
+            {District: "西部", SubDistrict: "四川", info: {cities: ["成都", "都江堰"]}},
+            {District: "西部", SubDistrict: "重庆", info: {cities: ["江北", "渝中"]}},
+            {District: "北部", SubDistrict: "辽宁", info: {cities: ["沈阳", "大连"]}},
+            {District: "南部", SubDistrict: "海南", info: {cities: ["海口", "三亚"]}},
+            {District: "南部", SubDistrict: "广西", info: {cities: ["南宁", "柳州", "桂林"]}},
+            {District: "东部", SubDistrict: "江西", info: {cities: ["南昌", "景德镇"]}},
+        ];
+
+        var temp = [];
+        //for循环
+        for (var i = 0; i < arr.length; i++) {
+
+            if (temp.length == 0) {
+                temp = temp.concat({
+                    District: arr[i].District,
+                    //将SubDistrict下沉一级，放到infos里面
+                    infos: [{
+                        SubDistrict: arr[i].SubDistrict,
+                        info: arr[i].info
+                    }]
+                });
+            } else {
+                for (var j = 0; j < temp.length; j++) {
+
+                    if (arr[i].District == temp[j].District) {
+
+                        temp[j].infos = temp[j].infos.concat({
+                            SubDistrict: arr[i].SubDistrict,
+                            info: arr[i].info
+                        });
+
+                        break;
+                    }
+
+                    if (j == temp.length - 1) {
+                        temp = temp.concat({
+                            District: arr[i].District,
+                            infos: []
+                        });
+                    }
+                }
+            }
+        }
+
+        //forEach()无法终止
+        // arr.forEach(function (item, itemIndex) {
+        //     if (temp.length == 0) {
+
+        //         temp = temp.concat({
+        //             District: item.District,
+        //             infos: [{
+        //                 SubDistrict: item.SubDistrict,
+        //                 info: item.info
+        //             }]
+        //         });
+        //     } else {
+        //         temp.forEach(function (otem, otemIndex) {
+
+        //             if (item.District == otem.District) {
+
+        //                 otem.infos = otem.infos.concat({
+        //                     SubDistrict: item.SubDistrict,
+        //                     info: item.info
+        //                 });
+
+        //                 //break;    //forEach()无法使用break来终止循环
+        //                 //return false;     //return false也不行
+        //             }
+
+        //             if (otemIndex == temp.length - 1) {
+        //                 temp = temp.concat({
+        //                     District: item.District,
+        //                     infos: []
+        //                 });
+        //             }
+        //         });
+        //     }
+        // });
+
+        console.log("temp", temp);
+
+
+        //2.数据的筛选，去除不是不泵站的数据并取SensorName的前两位
+        var arr1 = [{
+            BasicInfo: [
+                {
+                    SensorName: "1#运行泵",
+                    DataType: "运行状态"
+                },
+                {
+                    SensorName: "运行",
+                    DataType: "运行状态"
+                },
+                {
+                    SensorName: "1#电流泵",
+                    DataType: "电流"
+                },
+                {
+                    SensorName: "2#运行泵",
+                    DataType: "运行状态"
+                },
+                {
+                    SensorName: "3#运行泵",
+                    DataType: "运行状态"
+                },
+                {
+                    SensorName: "运行状态",
+                    DataType: "运行状态"
+                },
+                {
+                    SensorName: "4#运行泵",
+                    DataType: "运行状态"
+                },
+                {
+                    SensorName: "2#电流泵",
+                    DataType: "电流"
+                },
+                {
+                    SensorName: "3#电流泵",
+                    DataType: "电流"
+                },
+                {
+                    SensorName: "5#运行泵",
+                    DataType: "运行状态"
+                }
+            ]
+        }];
+        //多层for循环
+        // for (var i = 0; i < arr1.length; i++) {
+        //     for (var j = 0; j < arr1[i].BasicInfo.length; j++) {
+        //         if (arr1[i].BasicInfo[j].DataType == "运行状态" || arr1[i].BasicInfo[j].DataType == "电流") {
+        //             if (arr1[i].BasicInfo[j].SensorName.indexOf("泵") == -1) {
+        //                 arr1[i].BasicInfo.splice(j, 1);
+        //             }
+        //         }
+        //     }
+        //     for (var j = 0; j < arr1[i].BasicInfo.length; j++) {
+        //         arr1[i].BasicInfo[j].SensorName = arr1[i].BasicInfo[j].SensorName.substr(0, 2);
+        //     }
+        // }
+
+
+        //forEach()
+        // arr1.forEach(function (infos) {
+        //     infos.BasicInfo.forEach(function (item, index) {
+
+        //         if (item.DataType == "运行状态" || item.DataType == "电流") {
+        //             if (item.SensorName.indexOf("泵") == -1) {
+        //                 //item.SensorName = item.SensorName.substr(0, 2);
+        //                 infos.BasicInfo.splice(index, 1);
+        //             }
+        //         }
+        //     });
+
+        //     infos.BasicInfo.forEach(function (item, index) {
+        //         item.SensorName = item.SensorName.substr(0, 2);
+        //     });
+        // });
+
+
+        //map()
+        arr1.map(function (infos) {
+            infos.BasicInfo.map(function (item, index) {
+
+                if (item.DataType == "运行状态" || item.DataType == "电流") {
+                    if (item.SensorName.indexOf("泵") == -1) {
+                        //item.SensorName = item.SensorName.substr(0, 2);
+                        infos.BasicInfo.splice(index, 1);
+                    }
+                }
+            });
+
+            infos.BasicInfo.map(function (item, index) {
+                item.SensorName = item.SensorName.substr(0, 2);
+            });
+        });
+
+        console.log("arr1", arr1);
+
+        // BasicInfo: Array(8)
+        // 0: {SensorName: "1#", DataType: "运行状态"}
+        // 1: {SensorName: "1#", DataType: "电流"}
+        // 2: {SensorName: "2#", DataType: "运行状态"}
+        // 3: {SensorName: "3#", DataType: "运行状态"}
+        // 4: {SensorName: "4#", DataType: "运行状态"}
+        // 5: {SensorName: "2#", DataType: "电流"}
+        // 6: {SensorName: "3#", DataType: "电流"}
+        // 7: {SensorName: "5#", DataType: "运行状态"}
+    </script>
+</head>
+<body>
+
+</body>
+</html>
