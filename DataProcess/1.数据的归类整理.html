@@ -26,14 +26,15 @@
             {District: "南部", SubDistrict: "海南", info: {cities: ["海口", "三亚"]}},
             {District: "南部", SubDistrict: "广西", info: {cities: ["南宁", "柳州", "桂林"]}},
             {District: "东部", SubDistrict: "江西", info: {cities: ["南昌", "景德镇"]}},
+            {District: "东部", SubDistrict: "江苏", info: {cities: ["南京", "苏州"]}},
         ];
 
-        var temp = [];
+        var arrSelect = [];
         //for循环
         for (var i = 0; i < arr.length; i++) {
 
-            if (temp.length == 0) {
-                temp = temp.concat({
+            if (arrSelect.length == 0) {
+                arrSelect = arrSelect.concat({
                     District: arr[i].District,
                     //将SubDistrict下沉一级，放到infos里面
                     infos: [{
@@ -42,11 +43,10 @@
                     }]
                 });
             } else {
-                for (var j = 0; j < temp.length; j++) {
+                for (var j = 0; j < arrSelect.length; j++) {
 
-                    if (arr[i].District == temp[j].District) {
-
-                        temp[j].infos = temp[j].infos.concat({
+                    if (arr[i].District == arrSelect[j].District) {
+                        arrSelect[j].infos = arrSelect[j].infos.concat({
                             SubDistrict: arr[i].SubDistrict,
                             info: arr[i].info
                         });
@@ -54,8 +54,8 @@
                         break;
                     }
 
-                    if (j == temp.length - 1) {
-                        temp = temp.concat({
+                    if (j == arrSelect.length - 1) {
+                        arrSelect = arrSelect.concat({
                             District: arr[i].District,
                             infos: []
                         });
@@ -66,9 +66,9 @@
 
         //forEach()无法终止
         // arr.forEach(function (item, itemIndex) {
-        //     if (temp.length == 0) {
+        //     if (arrSelect.length == 0) {
 
-        //         temp = temp.concat({
+        //         arrSelect = arrSelect.concat({
         //             District: item.District,
         //             infos: [{
         //                 SubDistrict: item.SubDistrict,
@@ -76,10 +76,9 @@
         //             }]
         //         });
         //     } else {
-        //         temp.forEach(function (otem, otemIndex) {
+        //         arrSelect.forEach(function (otem, otemIndex) {
 
         //             if (item.District == otem.District) {
-
         //                 otem.infos = otem.infos.concat({
         //                     SubDistrict: item.SubDistrict,
         //                     info: item.info
@@ -89,8 +88,8 @@
         //                 //return false;     //return false也不行
         //             }
 
-        //             if (otemIndex == temp.length - 1) {
-        //                 temp = temp.concat({
+        //             if (otemIndex == arrSelect.length - 1) {
+        //                 arrSelect = arrSelect.concat({
         //                     District: item.District,
         //                     infos: []
         //                 });
@@ -99,10 +98,51 @@
         //     }
         // });
 
-        console.log("temp", temp);
+        //console.log("arrSelect", arrSelect);
 
 
-        //2.数据的筛选，去除不是不泵站的数据并取SensorName的前两位
+        // var Array = [];
+        //2.数据的每行个数控制，多余的插入到本行的下一行
+        arrSelect.forEach(function (item, itemIndex) {
+
+            if (item.infos.length > 3) {
+                var moreItem = item.infos.slice(3, item.infos.length);
+                item.infos.splice(3, item.infos.length - 3);
+
+                if (moreItem.length > 0) {
+
+                    //不能使用forEach()
+                    // moreItem.forEach(function (otem, otemIndex) {
+                    //     arrSelect.splice(itemIndex + (otemIndex / 3 + 1), 1, {
+                    //         District: item.District,
+                    //         infos: moreItem.slice(otemIndex, otemIndex + 3)
+                    //     })
+                    // });
+
+                    //for循环
+                    for (var i = 0; i < moreItem.length; i += 3) {
+                        arrSelect.splice(itemIndex + (i / 3 + 1), 0, {//插入位置 要删除数据的个数 要插入的数据
+                            District: item.District,
+                            infos: moreItem.slice(i, i + 3)
+                        })
+                    }
+                }
+            }
+        });
+
+        console.log("arrSelect", arrSelect);
+
+        // arrSelect: Array(7)
+        // 0: {District: "东部", infos: Array(3)}
+        // 1: {District: "东部", infos: Array(2)}
+        // 2: {District: "北部", infos: Array(3)}
+        // 3: {District: "北部", infos: Array(1)}
+        // 4: {District: "中部", infos: Array(3)}
+        // 5: {District: "南部", infos: Array(3)}
+        // 6: {District: "西部", infos: Array(3)}
+
+
+        //3.数据的筛选，去除不是不泵站的数据并取SensorName的前两位
         var arr1 = [{
             BasicInfo: [
                 {
