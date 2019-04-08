@@ -27,6 +27,11 @@
             {District: "南部", SubDistrict: "广西", info: {cities: ["南宁", "柳州", "桂林"]}},
             {District: "东部", SubDistrict: "江西", info: {cities: ["南昌", "景德镇"]}},
             {District: "东部", SubDistrict: "江苏", info: {cities: ["南京", "苏州"]}},
+            {District: "西部", SubDistrict: "新疆", info: {cities: ["乌鲁木齐"]}},
+            {District: "西部", SubDistrict: "甘肃", info: {cities: ["兰州"]}},
+            {District: "西部", SubDistrict: "青海", info: {cities: ["西宁"]}},
+            {District: "西部", SubDistrict: "西藏", info: {cities: ["拉萨"]}},
+            {District: "西部", SubDistrict: "宁夏", info: {cities: ["银川"]}}
         ];
 
         var arrSelect = [];
@@ -129,6 +134,22 @@
                 }
             }
         });
+
+        arrSelect.forEach(function (item, index) {
+            if (index == arrSelect.length - 1) {
+                var moreItem = item.infos.slice(3, item.infos.length);
+                item.infos.splice(3, item.infos.length - 3);
+
+                if (moreItem.length > 0) {
+                    for (var i = 0; i < moreItem.length; i += 3) {
+                        arrSelect.push({
+                            District: item.District,
+                            infos: moreItem.slice(i, i + 3)
+                        })
+                    }
+                }
+            }
+        })
 
         console.log("arrSelect", arrSelect);
 
