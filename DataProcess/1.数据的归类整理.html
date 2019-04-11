@@ -242,21 +242,21 @@
 
 
         //map()
-        arr1.map(function (infos) {
-            infos.BasicInfo.map(function (item, index) {
+        // arr1.map(function (infos) {
+        //     infos.BasicInfo.map(function (item, index) {
 
-                if (item.DataType == "运行状态" || item.DataType == "电流") {
-                    if (item.SensorName.indexOf("泵") == -1) {
-                        //item.SensorName = item.SensorName.substr(0, 2);
-                        infos.BasicInfo.splice(index, 1);
-                    }
-                }
-            });
+        //         if (item.DataType == "运行状态" || item.DataType == "电流") {
+        //             if (item.SensorName.indexOf("泵") == -1) {
+        //                 //item.SensorName = item.SensorName.substr(0, 2);
+        //                 infos.BasicInfo.splice(index, 1);
+        //             }
+        //         }
+        //     });
 
-            infos.BasicInfo.map(function (item, index) {
-                item.SensorName = item.SensorName.substr(0, 2);
-            });
-        });
+        //     infos.BasicInfo.map(function (item, index) {
+        //         item.SensorName = item.SensorName.substr(0, 2);
+        //     });
+        // });
 
         console.log("arr1", arr1);
 
@@ -269,6 +269,23 @@
         // 5: {SensorName: "2#", DataType: "电流"}
         // 6: {SensorName: "3#", DataType: "电流"}
         // 7: {SensorName: "5#", DataType: "运行状态"}
+
+        //filter 过滤器
+        arr1.forEach(function (item) {
+            let arrfilter = item.BasicInfo.filter(otem => otem.SensorName.indexOf("泵") !== -1);
+
+            console.log("arrfilter", arrfilter);
+
+            //arrfilter
+            // 0: {SensorName: "1#运行泵", DataType: "运行状态"}
+            // 1: {SensorName: "1#电流泵", DataType: "电流"}
+            // 2: {SensorName: "2#运行泵", DataType: "运行状态"}
+            // 3: {SensorName: "3#运行泵", DataType: "运行状态"}
+            // 4: {SensorName: "4#运行泵", DataType: "运行状态"}
+            // 5: {SensorName: "2#电流泵", DataType: "电流"}
+            // 6: {SensorName: "3#电流泵", DataType: "电流"}
+            // 7: {SensorName: "5#运行泵", DataType: "运行状态"}
+        })
     </script>
 </head>
 <body>
