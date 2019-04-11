@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>时间戳的处理</title>
+
+    <script type="text/javascript" src="methods.js"></script>
+    <script>
+        //获取时间戳
+        var timeStamp = new Date().getTime();
+
+        //自定时间戳 getTime()返回数值的单位是 毫秒
+        var timeStampDefine = (new Date("2019/04/11 15:21:12")).getTime();
+
+        //时间戳转换成日期格式
+        //Transform() -> methods.js
+        var time = Transform(timeStampDefine);//"2019/04/11 15:21:12"
+
+        //
+    </script>
+</head>
+<body>
+
+</body>
+</html>
