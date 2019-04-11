@@ -285,7 +285,14 @@
             // 5: {SensorName: "2#电流泵", DataType: "电流"}
             // 6: {SensorName: "3#电流泵", DataType: "电流"}
             // 7: {SensorName: "5#运行泵", DataType: "运行状态"}
+
+            arrfilter.forEach(function (arrItem) {
+                arrItem.SensorName = arrItem.SensorName.substr(0, 2);
+            })
+            return item.BasicInfo = arrfilter;
         })
+
+        console.log("arr1", arr1);
     </script>
 </head>
 <body>
