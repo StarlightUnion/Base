@@ -1,12 +1,14 @@
 //Created by wxc on 2019/04/11
+//存放共用的方法
 
 //2.时间戳的处理
 function addZero (m) {return m < 10 ? '0' + m : m}
 
 //timeStamp应为 毫秒
 //时间戳转普通日期格式 YYYY/MM/DD hh:mm:ss
-function Transform (timestamp) {
-    let time = new Date(timestamp);
+function Transform (timeStamp) {
+    timeStamp = timeStamp ? timeStamp : new Date().getTime();
+    let time = new Date(timeStamp);
     let y = time.getFullYear();
     let M = time.getMonth() + 1;
     let d = time.getDate();
@@ -20,11 +22,11 @@ function Transform (timestamp) {
 //时间戳转多种日期格式
 /*
 * format        string      格式
-* timestamp     int         时间戳 毫秒
+* timeStamp     int         时间戳 毫秒
 */
 
-// function formatTransform (format, timestamp) {
-//     var mSeconds = timestamp ? timestamp : new Date().getTime();
+// function formatTransform (format, timeStamp) {
+//     var mSeconds = timeStamp ? timeStamp : new Date().getTime();
 //     var time = new Date(mSeconds);
 
 //     var t = {
@@ -49,9 +51,9 @@ function Transform (timestamp) {
 //     return format;
 // }
 
-let formatTransform = (format, timestamp) => {
-    let mSeconds = timestamp ? timestamp : new Date().getTime();
-    let time = new Date(mSeconds);
+let formatTransform = (format, timeStamp) => {
+    timeStamp = timeStamp ? timeStamp : new Date().getTime();
+    let time = new Date(timeStamp);
 
     let t = {
         "M+": time.getMonth() + 1,  //月
@@ -91,9 +93,19 @@ Date.prototype.format = function(fmt) {
         fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
     }
     for(var k in o) {
-        if(new RegExp("(" + k + ")").test(fmt)){
+        if(new RegExp("(" + k + ")").test(fmt)) {
             fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
         }
     }
     return fmt;
+}
+
+//将某个元素内的值拷贝到粘贴板 idName
+function copyClick (idName) {
+    let idObj = document.getElementById(idName);
+    let idValue = document.getElementById(idName).value;
+
+    idObj.select();
+    document.execCommand("Copy");
+    alert(idValue + " 复制成功");
 }

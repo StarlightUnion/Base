@@ -6,34 +6,55 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>时间戳的处理</title>
 
-    <script type="text/javascript" src="methods.js"></script>
+    <script type="text/javascript" src="js/methods.js"></script>
     <script>
         //获取时间戳
         var timeStamp = new Date().getTime();
         console.log('timeStamp', timeStamp);
 
         //自定时间戳 getTime()返回数值的单位是 毫秒
-        var timeStampDefine = (new Date("2019/04/11 15:21:12")).getTime();
-        console.log('timeStampDefine', timeStampDefine);
+        // var timeStampDefine = (new Date("2019/04/11 15:21:12")).getTime();
+        // console.log('timeStampDefine', timeStampDefine);
 
         //时间戳转换成普通日期格式
         //Transform() -> methods.js
-        var time1 = Transform(timeStampDefine);//"2019/04/11 15:21:12"
-        console.log('time1', time1);
+        // var time1 = Transform(timeStampDefine);//"2019/04/11 15:21:12"
+        // console.log('time1', time1);
 
         //时间戳转换成指定日期格式
-        var time2 = formatTransform("yyyy/MM/dd hh:mm", timeStampDefine);//"2019/04/11 15:21"
-        console.log('time2', time2);
+        // var time2 = formatTransform("yyyy/MM/dd hh:mm", timeStampDefine);//"2019/04/11 15:21"
+        // console.log('time2', time2);
 
-        var time3 = formatTransform("yyyy-MM-dd hh:mm:ss", timeStampDefine);//"2019-04-11 15:21:12"
-        console.log('time3', time3);
+        // var time3 = formatTransform("yyyy-MM-dd hh:mm:ss", timeStampDefine);//"2019-04-11 15:21:12"
+        // console.log('time3', time3);
 
-        var time4 = formatTransform("yyyy-MM-dd hh:mm:ss 第q个季度", timeStampDefine);//"2019-04-11 15:21:12 第2个季度"
-        console.log('time4', time4);
+        // var time4 = formatTransform("yyyy-MM-dd hh:mm:ss 第q个季度", timeStampDefine);//"2019-04-11 15:21:12 第2个季度"
+        // console.log('time4', time4);
+
+
+        //转换显示
+        function transClick () {
+            let stamp = document.getElementById("timeStamp").value;
+            let timeObj = document.getElementById("time");
+
+            let time = Transform(Number(stamp));
+            timeObj.value = time;
+        }
 
     </script>
+
+    <style></style>
 </head>
 <body>
-
+    <div class="Trans">
+        <label>时间戳输入：</label>
+        <input type="text" id="timeStamp"/>
+        <button onclick="transClick()">转换</button>
+    </div>
+    <div class="copy">
+        <label>普通格式时间输出：</label>
+        <input type="text"id="time" readonly/>
+        <button onclick="copyClick('time')">复制</button>
+    </div>
 </body>
 </html>
