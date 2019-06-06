@@ -127,3 +127,36 @@ function showRealTime(clock){
 
     clock.innerHTML = now;
 }
+
+// 深拷贝
+// 深拷贝一个 对象 有两种方法，第一种是先将对象转换为json字符串，再将其转回为对象，第二种则是通过遍历
+
+// 1# 这种方法有局限性，会造成属性丢失，当值为undefined、function、symbol时会在转换过程中被忽略
+// let syb = Symbol('obj');
+// let person = {
+//    name :'tino',
+//    say: function(){
+//       console.log('hi');
+//    },
+//    ok: syb,
+//    un: undefined
+// }
+// let copy = JSON.parse(JSON.stringify(person));
+
+// copy
+// {name: "tino"}
+
+// 2#
+function deepCopy(obj) {
+    var result = Array.isArray(obj) ? [] : {};
+    for (var key in obj) {
+        if (obj.hasOwnProperty(key)) {
+            if (typeof obj[key] === 'object') {
+                result[key] = deepCopy(obj[key]);   //递归复制
+            } else {
+                result[key] = obj[key];
+            }
+        }
+    }
+    return result;
+}
