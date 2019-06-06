@@ -109,3 +109,21 @@ function copyClick (idName) {
     document.execCommand("Copy");
     alert(idValue + " 复制成功");
 }
+
+// 实时时间显示
+function showRealTime(clock){
+    let d = new Date();
+    let year = d.getFullYear();
+    let month = ((d.getMonth() + 1) < 10) ? ("0" + (d.getMonth() + 1)) : d.getMonth() + 1;
+    let date = (d.getDate() < 10) ? ("0" + d.getDate()) :  d.getDate();
+
+    // let days = new Array("日","一","二","三","四","五","六");
+    // let day = (d.getDay() < 10) ? ("0" + d.getDay()) : d.getDay();
+
+    let hour = (d.getHours() < 10) ? ("0" + d.getHours()) : d.getHours();
+    let min = (d.getMinutes() < 10) ? ("0" + d.getMinutes()) : d.getMinutes();
+    let sec = (d.getSeconds() < 10) ? ("0" + d.getSeconds()) : d.getSeconds();
+    let now = year + "年" + month + "月" + date + "日 " + hour + ":" + min + ":" + sec;
+
+    clock.innerHTML = now;
+}

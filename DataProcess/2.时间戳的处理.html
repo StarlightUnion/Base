@@ -41,12 +41,26 @@
             timeObj.value = time;
         }
 
+        function load(){
+		    window.setInterval('showRealTime(realTime)',1000);
+	    }
+
     </script>
 
-    <style></style>
+    <style>
+        div > label {
+            width: 150px;
+            display: inline-block;
+        }
+
+        .block, .Trans, .copy {
+            display: block;
+            line-height: 30px;
+        }
+    </style>
 </head>
-<body>
-    <div class="Block"></div>
+<body onload="load()">
+    <div class="block" id="realTime"></div>
     <div class="Trans">
         <label>时间戳输入：</label>
         <input type="text" id="timeStamp"/>
@@ -54,7 +68,7 @@
     </div>
     <div class="copy">
         <label>普通格式时间输出：</label>
-        <input type="text"id="time" readonly/>
+        <input type="text" id="time" readonly/>
         <button onclick="copyClick('time')">复制</button>
     </div>
 </body>
