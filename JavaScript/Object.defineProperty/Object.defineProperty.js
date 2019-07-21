@@ -123,5 +123,6 @@ Object.defineProperty(o, "name", {
   set: function (val) {
     this._name = val;
     localStorage.setItem('name', val);
-  };
+  }
 })
+o.name = "shanghai";// {_name: "shanghai", name:"This is shanghai"}
