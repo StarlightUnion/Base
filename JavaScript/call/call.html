@@ -1,0 +1,32 @@
+<!-- Created by wxc on 2019/07/19 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>call()</title>
+</head>
+<body>
+    <script>
+        var adder = {
+            base: 1,
+            add: function(a) {
+                var f = v => v + this.base;
+                return f(a);
+            },
+            addThruCall: function(a) {
+                var f = v => v + this.base;
+                var b = {
+                    base: 2
+                };
+
+                return f.call(b, a);
+            }
+        };
+
+        console.log(adder.add(1));// 2
+        console.log(adder.addThruCall(1));// 2
+    </script>
+</body>
+</html>
