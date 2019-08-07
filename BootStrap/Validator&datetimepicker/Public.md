@@ -1,7 +1,8 @@
 # BootStrapValidator无法自动验证BootStrap-datetimepicker的坑
 >##### 各插件版本信息：
 >jQuery: 3.4.1 | BootStrap: 3.3.7 | BootStrap-Validator: 0.5.3 | BootStrap-datetimepicker: 2.4.4
->##### 这是工作中遇到的问题，BootStrapValidator和BootStrap-datetimepicker在一起使用时会遇到无法验证的问题。问题：进入页面时不进行任何操作进行验证，此时出现提示验证失败（废话），之后再进行日期选择发现提示无法消除，验证仍然失败。
+
+>这是工作中遇到的问题，BootStrapValidator和BootStrap-datetimepicker在一起使用时会遇到无法验证的问题。问题：进入页面时不进行任何操作进行验证，此时出现提示验证失败（废话），之后再进行日期选择发现提示无法消除，验证仍然失败。
 
 ![avatar](images/validator1.png)
 >此时不管日期控件中选择任何日期，表单都不会自动验证，所以提交按钮无效，**表单无法提交**。
