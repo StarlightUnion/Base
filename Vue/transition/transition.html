@@ -10,10 +10,17 @@
 </head>
 <body>
   <div id="app">
-      <div class="enter-div">
-        <div class="showContainer">
-
-        </div>
+      <div
+        @mouseenter="show"
+        @mouseleave="hide">
+          <div class="enter-div">
+            鼠标移动
+          </div>
+          <transition name="fade">
+            <div class="showContainer" v-show="flag">
+              弹出层
+            </div>
+          </transition>
       </div>
   </div>
 
@@ -21,7 +28,15 @@
     var app = new Vue({
       el: "#app",
       data: {
-
+        flag: false,
+      },
+      methods: {
+        show: function () {
+          this.flag = true;
+        },
+        hide: function () {
+          this.flag = false;
+        }
       }
     })
   </script>
@@ -37,13 +52,43 @@
       height: 100%;
       display: flex;
       justify-content: center;
-      align-content: center;
+      /* align-items: center; */
     }
 
     .enter-div {
-      width: 100px;
+      width: 200px;
       height: 50px;
+      margin-top: 200px;
       background-color:darkgrey;
+      text-align: center;
+      line-height: 50px;
+    }
+
+    .showContainer {
+      position: absolute;
+      right: 620px;
+      top: 250px;
+      width: 200px;
+      /* height: 96px; */
+      line-height: 96px;
+      text-align: center;
+      color: black;
+      box-shadow: 0 0 5px -1px #ccc;
+      z-index: 10;
+      overflow: hidden;
+    }
+
+    .fade-enter-active, .fade-leave-active {
+      transition: all .10s ease;
+      height: 96px;
+    }
+
+    .fade-enter, .fade-leave-to {
+      height: 0;
+    }
+
+    .fade-enter-to, .fade-leave {
+      height: 96px;
     }
   </style>
 </body>
