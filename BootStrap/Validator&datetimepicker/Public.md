@@ -4,7 +4,7 @@
 
 >这是工作中遇到的问题，BootStrapValidator和BootStrap-datetimepicker在一起使用时会遇到无法验证的问题。问题：进入页面时不进行任何操作进行验证，此时出现提示验证失败（废话），之后再进行日期选择发现提示无法消除，验证仍然失败。
 
-![avatar](images/validator1.png)
+![avatar](images/validator1.gif)
 >此时不管日期控件中选择任何日期，表单都不会自动验证，所以提交按钮无效，**表单无法提交**。
 
 #### 引入的插件CDN
@@ -45,7 +45,7 @@
       <button class="btn btn-primary" id="onSubmit" type="submit">提交</button>
     </form>
   </div>
-  
+
   <style>
     .form-container {
       padding: 20px;
@@ -118,6 +118,8 @@ $(function () {
   })
 });
 ```
+
+![avatar](images/validator2.gif)
 >以上共有三种方法使之触发再次验证，这些方法中，`changeDate`换成`change`也是可行的。
 
 

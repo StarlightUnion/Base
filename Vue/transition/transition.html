@@ -14,7 +14,7 @@
         @mouseenter="show"
         @mouseleave="hide">
           <div class="enter-div">
-            鼠标移动
+            {{content}}
           </div>
           <transition name="fade">
             <div class="showContainer" v-show="flag">
@@ -29,13 +29,16 @@
       el: "#app",
       data: {
         flag: false,
+        content: "鼠标移入"
       },
       methods: {
         show: function () {
           this.flag = true;
+          this.content = "鼠标移出";
         },
         hide: function () {
           this.flag = false;
+          this.content = "鼠标移入";
         }
       }
     })
@@ -52,13 +55,13 @@
       height: 100%;
       display: flex;
       justify-content: center;
-      /* align-items: center; */
+      align-items: center;
     }
 
     .enter-div {
       width: 200px;
       height: 50px;
-      margin-top: 200px;
+      /* margin-top: 200px; */
       background-color:darkgrey;
       text-align: center;
       line-height: 50px;
@@ -78,15 +81,18 @@
       overflow: hidden;
     }
 
+    /* 进入和离开时过渡状态的 动画状态 */
     .fade-enter-active, .fade-leave-active {
       transition: all .10s ease;
       height: 96px;
     }
 
+    /* 进入时的 初始状态 和 离开时动画的 结束状态 */
     .fade-enter, .fade-leave-to {
       height: 0;
     }
 
+    /* 离开时的 初始状态 和 进入时动画的 结束状态 */
     .fade-enter-to, .fade-leave {
       height: 96px;
     }
