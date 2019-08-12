@@ -219,4 +219,4 @@ methods: {
 }
 ```
 
-> [官方文档](https://cn.vuejs.org/v2/guide/transitions.html)中的用法不止这几种，这里只例举了几种简单常用的。[源码在此](https://github.com/StarlightUnion/Base/tree/master/Vue/transition)
+> [官方文档](https://cn.vuejs.org/v2/guide/transitions.html)中的用法不止这几种，这里只例举了几种简单常用的。
