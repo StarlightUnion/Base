@@ -4,7 +4,7 @@
 
 ![avatar](images/transition1.gif)
 
->最终的效果**如上图所示**，当鼠标移入灰色方块时弹出层会**至上而下**显示出来，类似于 **拉链式窗帘(?)**。
+>最终的效果**如上图所示**，当鼠标移入灰色方块时弹出层会**至下而上**显示出来，类似于 **拉链式窗帘(?)**。
 
 ### 实例
 > 实现上图所示的效果代码如下：
@@ -129,11 +129,11 @@
 	.v-enter, .v-leave-to {
 	......
 	}
-	
+
 	.v-leave, .v-enter-to {
 	......
 	}
-	
+
 	......
 </style>
 ```
@@ -151,11 +151,11 @@
 	.fade-enter, .fade-leave-to {
 	......
 	}
-	
+
 	.fade-leave, .fade-enter-to {
 	......
 	}
-	
+
 	......
 </style>
 
@@ -178,15 +178,15 @@
 	.show-enter {
 	......
 	}
-	
+
 	.animation {
 	......
 	}
-	
+
 	.fly {
 	......
 	}
-	
+
 	......
 </style>
 
@@ -197,7 +197,7 @@
 <transition
 	v-on:enter="enter"
 	v-on:after-enter="after"
-	v-on:leave="leave" 
+	v-on:leave="leave"
 	......
 >
 	<div>
