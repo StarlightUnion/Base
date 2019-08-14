@@ -22,17 +22,17 @@
 </head>
 <body>
   <div id="app">
-      <div
+      <div class="event"
         @mouseenter="show"
         @mouseleave="hide">
-          <div class="enter-div">
-            {{content}}
-          </div>
           <transition name="fade">
             <div class="showContainer" v-show="flag">
               弹出层
             </div>
           </transition>
+          <div class="enter-div">
+            {{content}}
+          </div>
       </div>
   </div>
 
@@ -70,6 +70,13 @@
       align-items: center;
     }
 
+    .event {
+      height: 146px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
     .enter-div {
       width: 200px;
       height: 50px;
@@ -80,9 +87,6 @@
     }
 
     .showContainer {
-      position: absolute;
-      right: 620px;
-      top: 250px;
       width: 200px;
       /* height: 96px; */
       line-height: 96px;
