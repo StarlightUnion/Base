@@ -106,3 +106,20 @@ arr.every((item, index) => {
 })
 
 console.log('show', show);
+
+// 7. arr.filter()
+var arr = ['a', 'b', 'c', 'd', 'e'];
+var show = [];
+
+arr.filter((item, index) => {
+    if (index === 2) {
+        // break;// Uncaught SyntaxError: Illegal break statement
+        // continue;// Uncaught SyntaxError: Illegal continue statement: no surrounding iteration statement
+        // return;// ["a", "b", "d", "e"] 只能跳出本次循环
+        // return true;// ["a", "b", "d", "e"] 只能跳出本次循环
+        return false;// ["a", "b", "d", "e"] 只能跳出本次循环
+    }
+    show.push(item);
+})
+
+console.log('show', show);
