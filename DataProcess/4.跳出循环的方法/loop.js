@@ -98,11 +98,11 @@ arr.every((item, index) => {
     if (index === 2) {
         // break;// Uncaught SyntaxError: Illegal break statement
         // continue;// Uncaught SyntaxError: Illegal continue statement: no surrounding iteration statement
-        return;// ["a"] 成功跳出循环
-        return true;// ["a"] 成功跳出循环
-        return false;// ["a"] 成功跳出循环
+        // return;// ["a", "b"] 成功跳出循环
+        // return true;// ["a", "b", "d", "e"] 只能跳出本次循环
+        return false;// ["a", "b"] 成功跳出循环
     }
-    show.push(item);
+    return show.push(item);
 })
 
 console.log('show', show);

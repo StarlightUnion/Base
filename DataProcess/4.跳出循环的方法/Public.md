@@ -9,10 +9,10 @@
 3 | ``for...in`` | 成功 | 跳出本次循环 | 不合法 | 不合法 | 不合法 | √
 4 | ``Array.map()`` | 不合法 | 不合法 | 跳出本次循环 | 跳出本次循环 | 跳出本次循环 | ×
 5 | ``Array.some()`` | 不合法 | 不合法 | 跳出本次循环 | 成功 | 跳出本次循环 | √
-6 | ``Array.every()`` | 不合法 | 不合法 | 成功 | 成功 | 成功 | √
+6 | ``Array.every()`` | 不合法 | 不合法 | 成功 | 跳出本次循环 | 成功 | √
 7 | ``Array.filter()`` | 不合法 | 不合法 | 跳出本次循环 | 跳出本次循环 | 跳出本次循环 | ×
 
-> ``forEach``、``map``和``filter``目前我不知有什么办法停止遍历，在其他几种方法中，除了every有返回即可实现跳出多层遍历外，其他的都只能跳出一层。
+> ``forEach``、``map``和``filter``目前我不知有什么办法停止遍历，在其他几种方法中，上表中列出的方法均可实现结束循环。
 
 ### 1. for循环
 ```
@@ -104,13 +104,15 @@ arr.every((item, index) => {
     if (index === 2) {
         // break;// Uncaught SyntaxError: Illegal break statement
         // continue;// Uncaught SyntaxError: Illegal continue statement: no surrounding iteration statement
-        return;// ["a"] 成功跳出循环
-        return true;// ["a"] 成功跳出循环
-        return false;// ["a"] 成功跳出循环
+        // return;// ["a", "b"] 成功跳出循环
+        // return true;// ["a", "b", "d", "e"] 只能跳出本次循环
+        return false;// ["a", "b"] 成功跳出循环
     }
-    show.push(item);
+    return show.push(item);
 })
 ```
+> ``some()``与``every()``不同，some遍历中一个为真全部即为真，而every遍历中全部为真才行。some遍历中返回``true``才会退出执行，而every则需要返回``false``才会退出执行。
+
 ### 7. Array.filter()
 ```
 var arr = ['a', 'b', 'c', 'd', 'e'];
