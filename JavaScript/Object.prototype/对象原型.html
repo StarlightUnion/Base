@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>对象原型</title>
+
+    <script src="Object.prototype.js"></script>
+</head>
+<body>
+    <script>
+        // 1.
+        let a = {'a': 1, '-prop-value': 2};
+        a.valueOf();//2
+
+        // 2.
+        let b = {'a': 1, 'b': 2,};
+        b.valueOf();//{a: 1, b: 2}
+
+        // 3.
+        let bob = new Employee("Bob",'Builder');
+        let joe = new Customer('Joe');
+        let rg = new Employee("Red Green",'Handyman');
+        let mike = new Customer('Mike');
+        let mime = new Mime('Mime');
+
+        bob.greet();// Hi I'm Bob, the builder
+        joe.greet();// Hi I'm joe
+        rg.greet();// Hi I'm Red Green, the Handyman
+        mike.greet();// Hi I'm Mike
+        mime.greet();
+    </script>
+</body>
+</html>
