@@ -79,7 +79,7 @@ let formatTransform = (format, timeStamp) => {
 
 //时间格式转换 非时间戳转换
 //使用：var time = new Date().format("yyyy-MM-dd hh:mm:ss");
-Date.prototype.format = function(fmt) {
+Date.prototype.format = function (fmt) {
     var o = {
         "M+" : this.getMonth() + 1,                 //月份
         "d+" : this.getDate(),                    //日
@@ -89,10 +89,10 @@ Date.prototype.format = function(fmt) {
         "q+" : Math.floor((this.getMonth() + 3) / 3), //季度
         "S"  : this.getMilliseconds()             //毫秒
     };
-    if(/(y+)/.test(fmt)) {
+    if (/(y+)/.test(fmt)) {
         fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
     }
-    for(var k in o) {
+    for (var k in o) {
         if(new RegExp("(" + k + ")").test(fmt)) {
             fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
         }
@@ -111,7 +111,7 @@ function copyClick (idName) {
 }
 
 // 实时时间显示
-function showRealTime(clock){
+function showRealTime (clock) {
     let d = new Date();
     let year = d.getFullYear();
     let month = ((d.getMonth() + 1) < 10) ? ("0" + (d.getMonth() + 1)) : d.getMonth() + 1;
@@ -147,7 +147,7 @@ function showRealTime(clock){
 // {name: "tino"}
 
 // 2#
-function deepCopy(obj) {
+function deepCopy (obj) {
     var result = Array.isArray(obj) ? [] : {};
     for (var key in obj) {
         if (obj.hasOwnProperty(key)) {
@@ -159,4 +159,42 @@ function deepCopy(obj) {
         }
     }
     return result;
+}
+
+// 获取当天是周几
+function weekDayNow () {
+    return '星期' + '日一二三四五六'.charAt(new Date().getDay());
+}
+
+// 判断数组内是否有与传入对象相同的
+function contains (array, obj) {
+    var i = array.length;
+    while (i--) {
+        if (array[i] === obj) {
+            return true;
+        }
+    }
+    return false;
+}
+
+// 将字段值映射到字符串模板
+String.prototype.bind = function (args) {
+    var result = this;
+
+    var result = result.replace(/\$\w+\$/gi, function (matchs) {
+        var returns = args[matchs.replace(/\$/g, "")];
+        return (returns + "") == "undefined" ? "" : returns;
+    });
+    return result;
+}
+
+//判断一个对象是否为json对象
+function isJsonObj(obj) {
+    var isjson = typeof (obj) == "object" && Object.prototype.toString.call(obj).toLowerCase() == "[object object]" && !obj.length;
+    return isjson;
+}
+
+//判断一个对象是否为数组对象
+function isArray(obj) {
+    return Object.prototype.toString.call(obj) === '[object Array]';
 }
