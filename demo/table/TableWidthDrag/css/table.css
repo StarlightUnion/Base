@@ -1,0 +1,28 @@
+/* Created by wxc on 2019/10/12 */
+
+body, html {
+    height: 100%;
+    margin: 0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.table-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+table {
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    border: 1px solid #000;
+    text-align: center;
+    line-height: 36px;
+}

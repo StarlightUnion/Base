@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>waterfall</title>
+
+    <script src="https://cdn.bootcss.com/vue/2.5.2/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <ul class="waterfall">
+            <li class="list-item"
+            v-for="(item, index) in boxs"
+            :key="index"
+            :style="boxStyle(item)"
+            >{{index}}</li>
+        </ul>
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data () {
+                return {
+                    boxs: '',
+                    heights: '',// 所有盒子高度
+                    count: 20,// 盒子总数
+                    colHeight: '',// 每列高度
+                    boxNumInRow: 0,
+                    boxWidth: 200,// 盒子宽度
+
+                    // 空间距离
+                    topDistance: 10,
+                    leftDistance: 10,
+                }
+            },
+            methods: {
+                setRandomHight () {
+                    let heights = [];
+                    let boxs = [];
+
+                    for (let i = 0; i < this.count; i++) {
+                        let height = parseInt(Math.random() * 200) + 200;
+                        heights.push(height);
+                        boxs.push({'height': height});
+                    }
+
+                    this.heights = heights;
+                    this.boxs = boxs;
+                },
+                setPosition () {
+                    let boxNumInRow = parseInt(document.body.clientWidth / this.boxWidth);
+                    this.boxNumInRow = boxNumInRow;
+                    this.colHeight = [];
+
+                    for (let i = 0; i < boxNumInRow; i++) {
+                        this.colHeight[i] = 0;
+                    }
+
+                    this.boxs.map((item) => {
+                        let minIndedx = this.getMinHeightIndex(this.colHeight);
+
+                        // 操作新增对象属性
+                        this.$set(item, 'left', (minIndedx + 1) * this.leftDistance + minIndedx * this.boxWidth);
+                        this.$set(item, 'top', this.colHeight[minIndedx] + this.topDistance);
+                        this.colHeight[minIndedx] = this.colHeight[minIndedx] + item.height + this.topDistance;
+                    });
+                },
+                getMinHeightIndex (array) {
+                    let min = array[0];
+                    let index = 0;
+
+                    array.map((item, key) => {
+                        if (min > array[key]) {
+                            min = array[key];
+                            index = key;
+                        }
+                    })
+
+                    return index;
+                }
+            },
+            computed: {
+                boxStyle (item) {
+                    return (item) => {
+                        return `height: ${item.height}px; left: ${item.left}px; top: ${item.top}px;`;
+                    }
+                }
+            },
+            mounted () {
+                this.setRandomHight();
+                this.setPosition();
+
+                // 窗口大小变化事件
+                window.onresize = () => {
+                    this.setPosition();
+                }
+            }
+        })
+    </script>
+
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .waterfall {
+            margin: 0 auto;
+            list-style: none;
+            position: relative;
+            width: 100%;
+        }
+
+        .list-item {
+            position: absolute;
+            display: block;
+            width: 200px;
+            /* background-color: gainsboro; */
+            background-color: rgb(198, 228, 139);
+            border-radius: 5px;
+            box-shadow: 2px 2px 3px rgba(204, 204, 204, 0.5);
+            transition: all 1s;
+            cursor: pointer;
+        }
+
+        .list-item:hover {
+            transform: translate3d(0, -4px, 0);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, .1);
+        }
+    </style>
+</body>
+</html>

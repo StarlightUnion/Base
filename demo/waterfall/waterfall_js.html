@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>waterfall_js</title>
+
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .waterfall {
+            margin: 0 auto;
+            list-style: none;
+            position: relative;
+            width: 100%;
+        }
+
+        li {
+            position: absolute;
+            display: block;
+            width: 200px;
+            /* background-color: gainsboro; */
+            background-color: rgb(198, 228, 139);
+            border-radius: 5px;
+            box-shadow: 2px 2px 3px rgba(204, 204, 204, 0.5);
+            transition: all 1s;
+            cursor: pointer;
+        }
+
+        li:hover {
+            transform: translate3d(0, -4px, 0);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, .1);
+        }
+    </style>
+</head>
+<body>
+    <ul class="waterfall"></ul>
+</body>
+<script>
+    let colHeight;// 每列高度
+    let boxNumInRow = 0, count = 20;
+    let boxWidth = 200;
+    let boxs = [];// 盒子数组
+    // 空间距离
+    let topDistance = 10, leftDistance = 10;
+    // 容器
+    let container = document.getElementsByClassName('waterfall')[0];
+    // 子元素
+    let lis = document.getElementsByTagName("li");
+
+    function setRandomHight () {
+        boxs = [];
+
+        for (let i = 0; i < count; i++) {
+            let height = parseInt(Math.random() * 200) + 200;
+            boxs.push({'height': height});
+        }
+    }
+
+    function setPosition () {
+        boxNumInRow = parseInt(document.body.clientWidth / boxWidth);
+        colHeight = [];
+
+        for (let i = 0; i < boxNumInRow; i++) {
+            colHeight[i] = 0;
+        }
+
+        boxs.map((item) => {
+            let minIndedx = getMinHeightIndex(colHeight);
+
+            // 操作新增对象属性
+            item.left =  (minIndedx + 1) * leftDistance + minIndedx * boxWidth;
+            item.top = colHeight[minIndedx] + topDistance;
+            colHeight[minIndedx] = colHeight[minIndedx] + item.height + topDistance;
+        });
+    }
+
+    function getMinHeightIndex (array) {
+        let min = array[0];
+        let index = 0;
+
+        array.map((item, key) => {
+            if (min > array[key]) {
+                min = array[key];
+                index = key;
+            }
+        })
+
+        return index;
+    }
+
+    function creatBoxs (creat) {
+        boxs.map((item, index) => {
+            let li = lis[index] || document.createElement("li");
+
+            li.innerHTML = index;
+            li.style.height = item.height + "px";
+            li.style.left = item.left + "px";
+            li.style.top = item.top + "px";
+
+            // 插入
+            // creat && container.appendChild(li);
+            if (creat) {
+                container.appendChild(li);
+            }
+        })
+    }
+
+    // 执行
+    setRandomHight();
+    setPosition();
+    creatBoxs(true);
+
+    window.onresize = () => {
+        setPosition();
+        creatBoxs(false);
+    }
+</script>
+</html>
