@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>banner</title>
+  <script src="https://cdn.bootcss.com/vue/2.5.2/vue.min.js"></script>
+</head>
+<body>
+  <div id="app">
+    <div class="banner">
+      <div class="banner-prev" @click="prev"></div>
+      <div class="banner-next" @click="next"></div>
+      <transition-group tag="ul" name="banner-trans" class="banner-container">
+        <li class="image-container"
+        v-for="(item, index) in banners"
+        v-show="index === imgIndex"
+        :key="index">
+          <a :href="item.url" target="_blank">
+            <img :src="item.src" />
+          </a>
+        </li>
+      </transition-group>
+      <div class="banner-points">
+        <a class="banner-point" @click="jump(index)" :class="{'active': index === imgIndex}" v-for="(item, index) in banners.length" :key="index"></a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    var app = new Vue({
+      el: "#app",
+      data: {
+          imgIndex: 0,
+          timer: '',
+          banners: [
+            {src: 'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/cefed8336bae62768afeeb6a3b8f55c8.jpg?w=2452&h=920', url: 'https://www.mi.com/redminote7/'},
+            {src: 'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/743e04f29f920648b9d99b04a85ce343.jpg?w=2452&h=920', url: 'https://www.mi.com/a/h/11251.html'},
+            {src: 'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3d7d3f2df881cf62e5fafdada94f5018.jpg?w=2452&h=920', url: 'https://www.mi.com/mitvall-screen/e55c/'},
+            {src: 'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/6bd4174b8c5aad67a64864a5716ad152.jpg?w=2452&h=920', url: 'https://www.mi.com/washer-dryer-10/'},
+            {src: 'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/a1f0eb196c6c65a89ffba6efa4b5679c.jpg?w=2452&h=920', url: 'https://www.mi.com/a/h/11117.html'}
+          ]
+      },
+      methods: {
+        next() {
+          const lastPage = this.banners.length - 1;
+          if (this.imgIndex < lastPage) {
+            this.imgIndex += 1;
+          } else {
+            this.imgIndex = 0;
+          }
+        },
+        prev() {
+          const lastPage = this.banners.length - 1;
+          if (this.imgIndex > 0) {
+            this.imgIndex -= 1;
+          } else {
+            this.imgIndex = lastPage;
+          }
+        },
+        play() {
+          clearInterval(this.timer);
+          this.timer = setInterval(() => {
+            this.next();
+          }, 5000);
+        },
+        jump(index) {
+          this.imgIndex = index;
+        }
+      },
+      mounted() {
+        this.play();
+      }
+    })
+  </script>
+
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+    }
+
+    .banner {
+      position: relative;
+    }
+
+    .banner .banner-prev,
+    .banner .banner-next {
+      position: absolute;
+      top: 50%;
+      width: 41px;
+      height: 69px;
+      margin-top: -35px;
+      z-index: 5;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .banner-prev {
+      background: url("src/image/icon-slides.png") no-repeat -84px 50%;
+      left: 234px;
+      right: auto;
+    }
+
+    .banner-next {
+      background: url("src/image/icon-slides.png") no-repeat -125px 50%;
+      right: 0;
+      left: auto;
+    }
+
+    .banner-prev:hover {
+      background: url("src/image/icon-slides.png") no-repeat 0px 50%;
+    }
+
+    .banner-next:hover {
+      background: url("src/image/icon-slides.png") no-repeat -43px 50%;
+    }
+
+    .banner-points {
+      position: absolute;
+      display: inline-block;
+      width: 400px;
+      left: auto;
+      right: 30px;
+      bottom: 20px;
+      text-align: right;
+      transform: translateZ(0);
+      z-index: 10;
+    }
+
+    .banner-points .banner-point {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border: 2px solid #fff;
+      border-color: hsla(0, 0%, 100%, .3);
+      border-radius: 10px;
+      overflow: hidden;
+      background: rgba(0, 0, 0, .4);
+      opacity: 1;
+      margin: 0 4px;
+      cursor: pointer;
+    }
+
+    .banner-points .banner-point:hover {
+      background: hsla(0,0%,100%,.4);
+      border-color: rgba(0,0,0,.4);
+    }
+
+    .banner-points .active {
+      background: hsla(0,0%,100%,.4);
+      border-color: rgba(0,0,0,.4);
+    }
+
+    .banner-container {
+      width: 100%;
+      height: 460px;
+      overflow: hidden;
+    }
+
+    .banner-container .image-container {
+      width: 100%;
+      height: auto;
+    }
+
+    .image-container a {
+      display: block;
+    }
+
+    .image-container a img {
+      width: 100%;
+    }
+
+    /* 轮播图 */
+    .banner-trans-enter-active {
+      transition: all .10s ease-in-out;
+      opacity: 1;
+    }
+
+    .banner-trans-leave-active {
+      opacity: 0;
+    }
+
+    .banner-trans-enter, .banner-trans-leave-to {
+        opacity: 0;
+      }
+
+    .banner-trans-enter-to, .banner-trans-leave {
+      opacity: 1;
+    }
+  </style>
+</body>
+</html>
