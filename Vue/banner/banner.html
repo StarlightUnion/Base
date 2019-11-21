@@ -17,14 +17,23 @@
         v-for="(item, index) in banners"
         v-show="index === imgIndex"
         :key="index">
-          <a :href="item.url" target="_blank">
-            <img :src="item.src" />
-          </a>
+          <a><img :src="item.src" /></a>
         </li>
       </transition-group>
       <div class="banner-points">
         <a class="banner-point" @click="jump(index)" :class="{'active': index === imgIndex}" v-for="(item, index) in banners.length" :key="index"></a>
       </div>
+    </div>
+    <div class="banner slide">
+      <div class="banner-prev" @click="prev-slide"></div>
+      <div class="banner-next" @click="next-slide"></div>
+      <ul class="banner-container">
+        <li class="image-container slide-item"
+        v-for="(item, index) in banners"
+        :key="index">
+        <a><img :src="item.src" /></a>
+      </li>
+      </ul>
     </div>
   </div>
 
@@ -34,16 +43,19 @@
       data: {
           imgIndex: 0,
           timer: '',
+          delayTimer: '',
+          slideFlag: false,
           banners: [
-            {src: 'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/cefed8336bae62768afeeb6a3b8f55c8.jpg?w=2452&h=920', url: 'https://www.mi.com/redminote7/'},
-            {src: 'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/743e04f29f920648b9d99b04a85ce343.jpg?w=2452&h=920', url: 'https://www.mi.com/a/h/11251.html'},
-            {src: 'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3d7d3f2df881cf62e5fafdada94f5018.jpg?w=2452&h=920', url: 'https://www.mi.com/mitvall-screen/e55c/'},
-            {src: 'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/6bd4174b8c5aad67a64864a5716ad152.jpg?w=2452&h=920', url: 'https://www.mi.com/washer-dryer-10/'},
-            {src: 'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/a1f0eb196c6c65a89ffba6efa4b5679c.jpg?w=2452&h=920', url: 'https://www.mi.com/a/h/11117.html'}
+            {src: 'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/cefed8336bae62768afeeb6a3b8f55c8.jpg?w=2452&h=920'},
+            {src: 'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/743e04f29f920648b9d99b04a85ce343.jpg?w=2452&h=920'},
+            {src: 'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3d7d3f2df881cf62e5fafdada94f5018.jpg?w=2452&h=920'},
+            {src: 'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/6bd4174b8c5aad67a64864a5716ad152.jpg?w=2452&h=920'},
+            {src: 'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/a1f0eb196c6c65a89ffba6efa4b5679c.jpg?w=2452&h=920'}
           ]
       },
       methods: {
         next() {
+          this.delay();
           const lastPage = this.banners.length - 1;
           if (this.imgIndex < lastPage) {
             this.imgIndex += 1;
@@ -52,6 +64,7 @@
           }
         },
         prev() {
+          this.delay();
           const lastPage = this.banners.length - 1;
           if (this.imgIndex > 0) {
             this.imgIndex -= 1;
@@ -62,11 +75,22 @@
         play() {
           clearInterval(this.timer);
           this.timer = setInterval(() => {
-            this.next();
+            if (!this.slideFlag) {
+              this.next();
+            }
           }, 5000);
         },
         jump(index) {
+          this.delay();
           this.imgIndex = index;
+        },
+        // 防止手动切换和自动切换同时进行出现的混乱
+        delay() {
+          this.slideFlag = true;
+          clearInterval(this.delayTimer);
+          this.delayTimer = setInterval(() => {
+            this.slideFlag = false;
+          }, 1000);
         }
       },
       mounted() {
@@ -98,7 +122,6 @@
     }
 
     body, html {
-      height: 100%;
       width: 100%;
     }
 
@@ -110,7 +133,17 @@
 
     .banner {
       position: relative;
-      margin-top: 20px;
+      margin: 20px 0 20px;
+    }
+
+    .slide {
+      display: flex;
+      overflow: hidden;
+    }
+
+    .slide-item {
+      display: block;
+      width: 1226px;
     }
 
     .banner .banner-prev,
