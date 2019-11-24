@@ -27,14 +27,17 @@
     <div class="banner slide">
       <div class="banner-prev" @click="_prev"></div>
       <div class="banner-next" @click="_next"></div>
-      <ul class="banner-container"
+      <ul class="banner-container banner-slide"
       :style="transformStyle">
         <li class="image-container slide-item"
         v-for="(item, index) in banners"
         :key="index">
-        <a><img :src="item.src" /></a>
-      </li>
+          <a><img :src="item.src" /></a>
+        </li>
       </ul>
+      <div class="banner-points">
+        <a class="banner-point" @click="_jump(index)" :class="{'active': index === slideIndex}" v-for="(item, index) in banners.length" :key="index"></a>
+      </div>
     </div>
   </div>
 
@@ -51,6 +54,8 @@
           slideIndex: 0,
           _timer: '',
           Xvalue: 0,
+          _delayTimer: '',
+          _slideFlag: false,
           banners: [
             {src: 'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/cefed8336bae62768afeeb6a3b8f55c8.jpg?w=2452&h=920'},
             {src: 'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/743e04f29f920648b9d99b04a85ce343.jpg?w=2452&h=920'},
@@ -62,8 +67,8 @@
       methods: {
         next() {
           this.delay();
-          const lastPage = this.banners.length - 1;
-          if (this.imgIndex < lastPage) {
+          const lastIndex = this.banners.length - 1;
+          if (this.imgIndex < lastIndex) {
             this.imgIndex += 1;
           } else {
             this.imgIndex = 0;
@@ -71,11 +76,11 @@
         },
         prev() {
           this.delay();
-          const lastPage = this.banners.length - 1;
+          const lastIndex = this.banners.length - 1;
           if (this.imgIndex > 0) {
             this.imgIndex -= 1;
           } else {
-            this.imgIndex = lastPage;
+            this.imgIndex = lastIndex;
           }
         },
         play() {
@@ -99,36 +104,45 @@
         },
         // 滑动轮播图
         _next() {
+          this._delay();
           const lastIndex = this.banners.length - 1;
           if (this.slideIndex < lastIndex) {
-            if (this.slideIndex === lastIndex - 1 && this.banners.length % 4 !== 0) {
-              this.slideIndex += 1;
-              this.Xvalue = - ((this.slideIndex - 1) * 992 + (this.banners.length % 4) * 248);
-            } else {
-              this.slideIndex += 1;
-              this.Xvalue = - (this.slideIndex * 992);
-            }
+            this.slideIndex += 1;
+            this.Xvalue = - (this.slideIndex * 1226);
           } else {
             this.slideIndex = 0;
             this.Xvalue = 0;
           }
         },
         _prev() {
+          this._delay();
           const lastIndex = this.banners.length - 1;
           if (this.slideIndex > 0) {
             this.slideIndex -= 1;
-            this.Xvalue = - (this.slideIndex * 992);
+            this.Xvalue = - (this.slideIndex * 1226);
           } else {
             this.slideIndex = lastIndex;
-            this.Xvalue =  - (lastIndex * 992);
+            this.Xvalue =  - (lastIndex * 1226);
           }
         },
         _play() {
           clearInterval(this._timer);
-            this._timer = setInterval(() => {
-              this._next();
-            }, 5000);
-          }
+          this._timer = setInterval(() => {
+            this._next();
+          }, 5000);
+        },
+        _jump(index) {
+          this._delay();
+          this.slideIndex = index;
+          this.Xvalue = - (index * 1226);
+        },
+        _delay() {
+          this._slideFlag = true;
+          clearInterval(this._delayTimer);
+          this._delayTimer = setInterval(() => {
+            this._slideFlag = false;
+          }, 1000);
+        },
       },
       computed: {
         transformStyle () {
@@ -264,15 +278,20 @@
     }
 
     .banner-container {
-      width: 100%;
+      position: relative;
       height: 460px;
-      overflow: hidden;
+      display: flex;
+    }
+
+    .banner-slide {
+      transition: all 1s ease-in-out;
     }
 
     .banner-container .image-container {
-      width: 100%;
+      /* width: 100%; */
       height: auto;
     }
+
 
     .image-container a {
       display: block;
