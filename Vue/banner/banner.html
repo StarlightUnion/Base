@@ -128,7 +128,9 @@
         _play() {
           clearInterval(this._timer);
           this._timer = setInterval(() => {
-            this._next();
+            if (!this._slideFlag) {
+              this._next();
+            }
           }, 5000);
         },
         _jump(index) {
@@ -156,20 +158,20 @@
         this._play();
 
         // 切换浏览器tab页进入
-        window.onfocus = () => {
-          this.timer = setInterval(() => {
-            this.next();
-          }, 5000);
-          this._timer = setInterval(() => {
-            this._next();
-          }, 5000);
-        }
+        // window.onfocus = () => {
+        //   this.timer = setInterval(() => {
+        //     this.next();
+        //   }, 5000);
+        //   this._timer = setInterval(() => {
+        //     this._next();
+        //   }, 5000);
+        // }
 
         // 切换浏览器tab页退出
-        window.onblur = () => {
-          clearInterval(this.timer);
-          clearInterval(this._timer);
-        }
+        // window.onblur = () => {
+        //   clearInterval(this.timer);
+        //   clearInterval(this._timer);
+        // }
       }
     })
   </script>
@@ -222,23 +224,23 @@
     }
 
     .banner-prev {
-      background: url("src/image/icon-slides.png") no-repeat -84px 50%;
+      background: url("images/icon-slides.png") no-repeat -84px 50%;
       left: 0;
       right: auto;
     }
 
     .banner-next {
-      background: url("src/image/icon-slides.png") no-repeat -125px 50%;
+      background: url("images/icon-slides.png") no-repeat -125px 50%;
       right: 0;
       left: auto;
     }
 
     .banner-prev:hover {
-      background: url("src/image/icon-slides.png") no-repeat 0px 50%;
+      background: url("images/icon-slides.png") no-repeat 0px 50%;
     }
 
     .banner-next:hover {
-      background: url("src/image/icon-slides.png") no-repeat -43px 50%;
+      background: url("images/icon-slides.png") no-repeat -43px 50%;
     }
 
     .banner-points {
@@ -301,7 +303,7 @@
       width: 100%;
     }
 
-    /* 轮播图 */
+    /* 闪现轮播图 */
     .banner-trans-enter-active {
       transition: all .10s ease-in-out;
       opacity: 1;
