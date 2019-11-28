@@ -58,7 +58,7 @@ function compile(el, vm) {
     let fragment = document.createDocumentFragment();
 
     while(child = vm.$el.firstChild) {
-        fragment.appendChild(child);
+        fragment.appendChild(child);// 将el中的内容放入内存中
     }
 
     // 查找和替换
@@ -68,7 +68,7 @@ function compile(el, vm) {
             let reg = /\{\{(.*?)\}\}/g;
 
             if (node.nodeType === 3 && reg.test(txt)) {
-                console.log(RegExp.$1);// 匹配的第一个分组
+                // console.log(RegExp.$1);// 匹配的第一个分组
                 let arr = RegExp.$1.split('.');
                 let val = vm;
 
