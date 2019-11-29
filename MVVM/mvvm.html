@@ -7,6 +7,7 @@
   <title>mvvm</title>
 
   <script src="js/mvvm.js"></script>
+  <!-- <script src="js/watcher_demo.js"></script> -->
 </head>
 <body>
   <div id="app">
@@ -15,6 +16,9 @@
     <p>主打歌为{{album.theme}}</p>
     <p>作词人为{{singer}}等人。</p>
     为你弹奏肖邦的{{album.theme}}
+    <br/>
+    <input v-model="c" type="text">
+    <p>求和的值是{{sum}}</p>
   </div>
 
   <script>
@@ -26,8 +30,24 @@
           name: '十一月的肖邦',
           theme: '夜曲'
         },
-        singer: '周杰伦'
-      }
+        singer: '周杰伦',
+        // input
+        c: 2,
+        // computed && mounted
+        a: 1,
+        b: 9
+      },
+      computed: {
+        sum() {
+          return this.a + this.b;
+        },
+        noop() {}
+      },
+      mounted() {
+        setTimeout(() => {
+          console.log('OK');
+        }, 1000);
+      },
     });
   </script>
 </body>
