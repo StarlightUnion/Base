@@ -93,6 +93,7 @@ Page({
 > 配置tabBar的选中样式要在外一层，之前不知道，以为每一个都可以配。。。
 
 ```
+// app.json
 ...
 "tabBar": {
     "color": "#000",// 默认样式
@@ -116,5 +117,5 @@ Page({
   ...
 ```
 
-[一个可以查询天气的小程序](https://github.com/StarlightUnion/weather-MiniProgram)
+[一个可以查询天气的小程序源码](https://github.com/StarlightUnion/weather-MiniProgram)
 
