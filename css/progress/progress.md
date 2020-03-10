@@ -211,7 +211,7 @@ export default {
 
 ### 2.React
 
-```react
+```js
 // 组件
 class IProgress extends React.Component {
   render() {
