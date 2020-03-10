@@ -2,7 +2,7 @@
 
 
 
-![image](/Users/xingchen/Documents/GitHub/Basic/css/images/css01-1.png)
+![image](../images/css01-1.png)
 
 > 如上图所示，最近碰见有个需求，需要实现上图效果。外面矩形好说，阴影部分犯了难了，不知为何，我看到第一眼居然是想用``canvas``中的贝塞尔曲线画出来。。。~~最近在入门canvas。。~~
 >
@@ -35,7 +35,7 @@
 <div class="circle"></div>
 ```
 
-![image](/Users/xingchen/Documents/GitHub/Basic/css/images/css01-2.png)
+![image](../images/css01-2.png)
 
 有了例子，基本上一目了然了，我们可以发现``border-radius: 50px 50px 50px 50px/50px 100px 20px 0px``其实可以翻译成：
 
@@ -72,7 +72,7 @@ border-radius: 左上角水平长度值 右上角水平长度值 右下角水平
 
 首先把该做的做了，把架子搭好。根据以上代码，不出意外的话，实现的效果是这样的⬇️。
 
-![image](/Users/xingchen/Documents/GitHub/Basic/css/images/css01-3.png)
+![image](../images/css01-3.png)
 
 接下来就根据本节中的第一小节的结论尝试实现曲线效果。仔细观察效果图可以发现图中要进行处理的角其实**只有两个**，分别为**左上角和右下角**。
 
@@ -80,7 +80,7 @@ border-radius: 左上角水平长度值 右上角水平长度值 右下角水平
 
 再次观察效果图，可以发现**水平长度**和**垂直长度**分别是这个**span标签**的**宽**和**高**，但是由于**文字长度是不固定的**，span标签的宽其实也是不固定的，此时可以设置``x = 100%``，那么``Y = 40px``。现在来看一下效果⬇️。
 
-![image](/Users/xingchen/Documents/GitHub/Basic/css/images/css01-4.png)
+![image](../images/css01-4.png)
 
 莫慌，给span加个内边距，控制一下最大宽度，然后调整一下背景的透明度。最终就可以实现**首图**的效果了，并且阴影部分是动态的，放代码。。。
 
