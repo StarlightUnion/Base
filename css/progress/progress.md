@@ -15,14 +15,12 @@
 ### 1.**Windows10**
 
 > 没有测Opera，另外别问我为什么没**Safari**。。。
-
-序号 | 浏览器 | 显示效果 
-:-: | :-: | :-: 
-1 | Google Chrome | ![image](../images/css02-5.png) 
-2 | Microsoft Edge(chromium内核) | ![image](../images/css02-6.png) 
-3 | Firefox | ![image](../images/css02-4.png) 
-4 | Internet Explorer | ![image](../images/css02-3.png) 
-
+| 序号 |            浏览器            |            显示效果             |
+| :--: | :--------------------------: | :-----------------------------: |
+|  1   |        Google Chrome         | ![image](../images/css02-5.png) |
+|  2   | Microsoft Edge(chromium内核) | ![image](../images/css02-6.png) |
+|  3   |           Firefox            | ![image](../images/css02-4.png) |
+|  3   |     Internet Explorer        | ![image](../images/css02-3.png) |
 ### 2.**macOS Catalina**
 
 > 同样没有测Opera，这里也别问我为什么没**IE**。。。
