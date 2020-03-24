@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>selector</title>
+
+  <style>
+    .class {
+      font-weight: 800;
+    }
+
+    #id {
+      font-size: 20px;
+    }
+
+    /* 选择器增强 选择含有class类的p元素 */
+    p.class {
+      color: red;
+    }
+
+    /* 伪类选择 */
+    p:hover {
+      cursor: pointer;
+    }
+
+    /* 属性选择 */
+    p[title] {
+      color: red;
+    }
+
+    /* 属性值选择 */
+    p[title="today"]:hover {
+      color: #000;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <p class="class">今天是周一。Today is Monday.</p>
+    <p id="id">今天是周一。Today is Monday.</p>
+    <p title>Today is Monday.今天是周一。</p>
+    <p title="today">Today is Monday.今天是周一。</p>
+    <article>
+      <p>Today is Monday.今天是周一。</p>
+      <span>Today is Monday.今天是周一。</span>
+      <div>今天是周一。Today is Monday.</div>
+      <section>
+        <p>今天是周一。Today is Monday.</p>
+        <p>今天是周一。Today is Monday.</p>
+        <p>今天是周一。Today is Monday.</p>
+      </section>
+    </article>
+  </div>
+</body>
+</html>
