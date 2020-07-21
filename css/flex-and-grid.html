@@ -60,6 +60,7 @@
       grid-template-rows: repeat(3, 50px);
     }
 
+    /* grid-container-1 */
     .grid-container-1 {
       display: grid;
       grid-template-columns: repeat(3, 33.33%);
@@ -67,6 +68,7 @@
       grid-template-areas: 'a a a' 'b b b' 'c c c';
     }
 
+    /* grid-container-2 */
     .grid-container-2 {
       display: grid;
       grid-template-columns: repeat(4, 100px);
@@ -78,6 +80,21 @@
     .grid-container-2 .item-1 {
       grid-column-start: 1;
       grid-column-end: 4;
+    }
+
+    /* grid-container-3 */
+    .grid-container-3 {
+      grid-template-columns: repeat(2, 50%);
+      grid-template-rows: repeat(4, 200px);
+      display: grid;
+      grid-auto-flow: row;
+      grid-row-gap: 16px;
+      grid-column-gap: 16px;
+    }
+
+    .grid-container-3 .item-1 {
+      grid-column-start: 1;
+      grid-column-end: 3;
     }
   </style>
 </head>
@@ -107,6 +124,18 @@
   </div>
   <!-- grid-container-2 -->
   <div class="grid-container-2">
+    <div class="item item-1">1</div>
+    <div class="item item-2">2</div>
+    <div class="item item-3">3</div>
+    <div class="item item-4">4</div>
+    <div class="item item-5">5</div>
+    <div class="item item-6">6</div>
+    <div class="item item-7">7</div>
+    <div class="item item-8">8</div>
+    <div class="item item-9">9</div>
+  </div>
+  <!-- grid-container-3 -->
+  <div class="grid-container-3">
     <div class="item item-1">1</div>
     <div class="item item-2">2</div>
     <div class="item item-3">3</div>
