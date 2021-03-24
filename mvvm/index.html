@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
   <script src="js/mvvm.js"></script>
   <!-- <script src="js/watcher_demo.js"></script> -->
 </head>
+
 <body>
   <div id="app">
     <h1>{{song}}</h1>
@@ -16,7 +18,7 @@
     <p>主打歌为{{album.theme}}</p>
     <p>作词人为{{singer}}等人。</p>
     为你弹奏肖邦的{{album.theme}}
-    <br/>
+    <br />
     <input v-model="c" type="text">
     <p>求和的值是{{sum}}</p>
   </div>
@@ -41,7 +43,7 @@
         sum() {
           return this.a + this.b;
         },
-        noop() {}
+        noop() { }
       },
       mounted() {
         setTimeout(() => {
@@ -51,4 +53,5 @@
     });
   </script>
 </body>
+
 </html>

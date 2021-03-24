@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,21 +9,18 @@
 
     <script src="https://cdn.bootcss.com/vue/2.5.2/vue.min.js"></script>
 </head>
+
 <body>
     <div id="app">
         <ul class="waterfall">
-            <li class="list-item"
-            v-for="(item, index) in boxs"
-            :key="index"
-            :style="boxStyle(item)"
-            >{{index}}</li>
+            <li class="list-item" v-for="(item, index) in boxs" :key="index" :style="boxStyle(item)">{{index}}</li>
         </ul>
     </div>
 
     <script>
         var app = new Vue({
             el: '#app',
-            data () {
+            data() {
                 return {
                     boxs: '',
                     heights: '',// 所有盒子高度
@@ -37,20 +35,20 @@
                 }
             },
             methods: {
-                setRandomHight () {
+                setRandomHight() {
                     let heights = [];
                     let boxs = [];
 
                     for (let i = 0; i < this.count; i++) {
                         let height = parseInt(Math.random() * 200) + 200;
                         heights.push(height);
-                        boxs.push({'height': height});
+                        boxs.push({ 'height': height });
                     }
 
                     this.heights = heights;
                     this.boxs = boxs;
                 },
-                setPosition () {
+                setPosition() {
                     let boxNumInRow = parseInt(document.body.clientWidth / this.boxWidth);
                     this.boxNumInRow = boxNumInRow;
                     this.colHeight = [];
@@ -68,7 +66,7 @@
                         this.colHeight[minIndedx] = this.colHeight[minIndedx] + item.height + this.topDistance;
                     });
                 },
-                getMinHeightIndex (array) {
+                getMinHeightIndex(array) {
                     let min = array[0];
                     let index = 0;
 
@@ -83,13 +81,11 @@
                 }
             },
             computed: {
-                boxStyle (item) {
-                    return (item) => {
-                        return `height: ${item.height}px; left: ${item.left}px; top: ${item.top}px;`;
-                    }
+                boxStyle(item) {
+                    return (item) => `height: ${item.height}px; left: ${item.left}px; top: ${item.top}px;`;
                 }
             },
-            mounted () {
+            mounted() {
                 this.setRandomHight();
                 this.setPosition();
 
@@ -102,7 +98,8 @@
     </script>
 
     <style>
-        body, html {
+        body,
+        html {
             height: 100%;
             margin: 0;
         }
@@ -137,4 +134,5 @@
         }
     </style>
 </body>
+
 </html>
