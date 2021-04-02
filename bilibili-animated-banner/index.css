@@ -1,0 +1,131 @@
+*:not(p) {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-size: calc(10px + 0.2vw);
+  font-family: -apple-system,
+    Ubuntu,
+    Cantarell,
+    "Helvetica Neue",
+    sans-serif,
+    "Apple Color Emoji";
+}
+
+p {
+  font-size: 1.5em;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+/* banner */
+header {
+  margin: 0 auto;
+  position: relative;
+  min-height: 155px;
+  height: 9.375vw;
+  min-width: 999px;
+  overflow: hidden;
+
+  --precent: 0.5;
+  --window-width: 0;
+}
+
+header>.layer {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+header .mountain {
+  height: 120%;
+  transform: translate(calc(-1.8% + var(--precent) * .095 * var(--window-width)), -17px);
+}
+
+header .lake {
+  height: 120%;
+  transform: translate(calc(21% + var(--precent) * .1 * var(--window-width)), 5px);
+}
+
+header .right-shore {
+  height: 110%;
+  transform: translateX(calc(36.5% + var(--precent) * .11 * var(--window-width)));
+}
+
+header .bridge {
+  height: 112%;
+  transform: translateX(calc(-58% + var(--precent) * .2 * var(--window-width)));
+}
+
+header .boat {
+  height: 40%;
+  transform: translate(calc(225% + var(--precent) * .095 * var(--window-width)), 78%);
+}
+
+header .b-2233 {
+  height: 55%;
+  transform: translate(calc(98% + var(--precent) * .08 * var(--window-width)), 41%);
+  opacity: calc(1 - var(--precent));
+}
+
+header .sakura {
+  height: 81%;
+  transform: translate(calc(-20% + var(--precent) * .48 * var(--window-width)), 12%);
+}
+
+header .kite {
+  height: 52%;
+  transform: translate(calc(-67% + var(--precent) * .55 * var(--window-width)), 64%);
+}
+
+header .k-22 {
+  height: 89%;
+  transform: translate(calc(-228% + var(--precent) * .26 * var(--window-width)), 11%);
+  opacity: calc(var(--precent) - .5);
+}
+
+header .k-33 {
+  height: 65%;
+  transform: translate(calc(-1200% + var(--precent) * .39 * var(--window-width)), 32%);
+  opacity: calc(var(--precent) - .5);
+}
+
+header .sakura-2 {
+  height: 73%;
+  transform: translate(calc(-285% + var(--precent) * .8 * var(--window-width)), 20%);
+}
+
+header .sakura-big {
+  height: 115%;
+  transform: translateX(calc(-34% + var(--precent) * 1 * var(--window-width)));
+}
+
+header .picnic {
+  height: 100%;
+  transform: translate(calc(-137% + var(--precent) * 1 * var(--window-width)), 10%);
+  opacity: calc(var(--precent) + 0.5);
+}
+
+header .willow {
+  height: 136%;
+  transform: translateX(calc(170% + var(--precent) * 1 * var(--window-width)));
+  filter: blur(2px);
+}
+
+header .sakura-right {
+  height: 121%;
+  transform: translateX(calc(-270% + var(--precent) * 1.9 * var(--window-width)));
+  filter: blur(1px);
+}
+
+/* main */
+main {
+  padding: 1vh 2vw;
+}

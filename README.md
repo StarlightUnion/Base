@@ -8,7 +8,7 @@
 
   ![2_waterfall](/docs/images/2_waterfall.png)
 
-* 3.[春-bilibili首页动画横幅](https://starlightunion.github.io/Frontend-Demos/bilibili-animated-bnner/index.html)
+* 3.[春-bilibili首页动画横幅](https://starlightunion.github.io/Frontend-Demos/bilibili-animated-banner/index.html)
 
   ![3_bab](/docs/images/3_bab.png)
 
