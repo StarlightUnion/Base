@@ -2,6 +2,14 @@
 
 > 保存有趣的前端小demo的仓库。
 
+## `CSS`面试题
+
+* 1.[在正方形中实现红色对角线](https://starlightunion.github.io/Frontend-Demos/css-interview/html/1-diagonal-in-box.html)
+
+  ![1_diagonal](/docs/images/css-interview/1_diagonal.png)
+
+## 其它DEMO
+
 * 1.[MVVM原理demo](https://starlightunion.github.io/Frontend-Demos/mvvm/index.html)
 
 * 2.[瀑布流演示](https://starlightunion.github.io/Frontend-Demos/waterfall/waterfall.html)

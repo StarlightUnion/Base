@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>在正方形中实现一条对角线</title>
+
+  <link rel="stylesheet" href="../style/common.css" />
+
+  <style>
+    #box {
+      margin: 0 auto;
+      width: 100px;
+      height: 100px;
+      border: 1px solid #000;
+      position: relative;
+    }
+
+    /* 实现对角线 */
+    #box {
+      background: linear-gradient(45deg, #fff 49.5%, red 49.5%, red 50.5%, #fff 50.5%);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 题目 -->
+  <div class="question">
+    <b>题目要求：</b>
+    <p>要求在长宽为100px * 100px，边框为1px的内部实现一条红色的对角线，线宽为1px。</p>
+    <p>要求在不添加任何元素的情况下实现。</p>
+  </div>
+  <!-- 内容 -->
+  <div id="box"></div>
+</body>
+
+</html>
